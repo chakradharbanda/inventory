@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 export interface Product {
   id: number;
@@ -8,30 +11,44 @@ export interface Product {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class InventoryService {
-  private products: Product[] = [
-    { id: 1, name: 'Product 1', quantity: 10 },
-    { id: 2, name: 'Product 2', quantity: 20 },
-    { id: 3, name: 'Product 3', quantity: 30 }
-  ];
+  private productsUrl = 'http://localhost:8080/api/products';  // URL to web api
 
-  constructor() { }
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
 
+  constructor(private http: HttpClient) { }
+
+  /** GET products from the server */
   getProducts(): Observable<Product[]> {
-    return of(this.products);
+    return this.http.get<Product[]>(this.productsUrl)
+      .pipe(
+        catchError(this.handleError<Product[]>('getProducts', []))
+      );
   }
 
+  /** GET product by id. Will 404 if id not found */
   getProduct(id: number): Observable<Product> {
-    const product = this.products.find(p => p.id === id);
-    return of(product!);
+    const url = `${this.productsUrl}/${id}`;
+    return this.http.get<Product>(url).pipe(
+      catchError(this.handleError<Product>(`getProduct id=${id}`))
+    );
   }
 
-  updateProduct(product: Product): void {
-    const index = this.products.findIndex(p => p.id === product.id);
-    if (index !== -1) {
-      this.products[index] = product;
-    }
+  /** PUT: update the product on the server */
+  updateProduct(product: Product): Observable<any> {
+    return this.http.put(this.productsUrl, product, this.httpOptions).pipe(
+      catchError(this.handleError<any>('updateProduct'))
+    );
+  }
+
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      console.error(error); // log to console instead
+      return of(result as T);
+    };
   }
 }
