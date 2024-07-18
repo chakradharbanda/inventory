@@ -1,6 +1,7 @@
-package com.inventory.inventory;
+package com.inventory.inventory.entity;
 
 import javax.persistence.*;
+
 import java.util.List;
 
 @Entity

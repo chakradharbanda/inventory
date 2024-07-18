@@ -1,7 +1,10 @@
-package com.inventory.inventory;
+package com.inventory.inventory.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import com.inventory.inventory.entity.Product;
+import com.inventory.inventory.service.ProductService;
 
 import java.util.List;
 

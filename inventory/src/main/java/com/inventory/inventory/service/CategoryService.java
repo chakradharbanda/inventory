@@ -1,7 +1,10 @@
-package com.inventory.inventory;
+package com.inventory.inventory.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.inventory.inventory.entity.Category;
+import com.inventory.inventory.repository.CategoryRepository;
 
 import java.util.List;
 
