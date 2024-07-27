@@ -43,16 +43,16 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
-            .authorizeRequests()
-                .antMatchers("/api/auth/**").permitAll()  // Allow public access to authentication endpoints
-                .antMatchers("/api/products/**").authenticated()  // Require authentication for product endpoints
-                .antMatchers("/api/test/**").authenticated()  // Allow public access to test endpoint
-                .anyRequest().authenticated()  // Require authentication for all other requests
-            .and()
-            .sessionManagement()
+        http.cors().and().csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/api/auth/**").permitAll() // Allow public access to authentication endpoints
+                .antMatchers("/api/products**").authenticated() // Require authentication for product endpoints
+                .antMatchers("/api/test/**").authenticated() // Allow public access to test endpoint
+                .anyRequest().authenticated() // Require authentication for all other requests
+                .and()
+                .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        
+
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 }

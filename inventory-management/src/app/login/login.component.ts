@@ -1,14 +1,33 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
-import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { JwtModule } from '@auth0/angular-jwt';
+import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { CheckboxModule } from 'primeng/checkbox';
+import { InputTextModule } from 'primeng/inputtext';
+import { InputGroupModule } from 'primeng/inputgroup';
+import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
+import { StyleClassModule } from 'primeng/styleclass';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, HttpClientModule],
+  imports: [
+    FormsModule,
+    TableModule,
+    ButtonModule,
+    RouterModule,
+    ReactiveFormsModule,
+    InputTextModule,
+    InputGroupAddonModule,
+    InputGroupModule,
+    StyleClassModule,
+    HttpClientModule,
+    CheckboxModule,
+  ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
