@@ -15,6 +15,7 @@ import com.inventory.inventory.service.UserService;
 import com.inventory.inventory.util.JwtUtil;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/auth")
 public class AuthController {
 

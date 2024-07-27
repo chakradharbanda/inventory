@@ -13,25 +13,24 @@ import { JwtModule } from '@auth0/angular-jwt';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
-  username: string | undefined;
-  password: string | undefined;
+  username: string = '';
+  password: string = '';
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  onSubmit() {
-    this.authService
-      .login({ username: this.username, password: this.password })
-      .subscribe({
-        next: (success) => {
-          if (success) {
-            this.router.navigate(['']);
-          } else {
-            alert('Login failed');
-          }
-        },
-        error: (error) => {
-          alert('Login failed');
-        },
-      });
+  login() {
+    this.authService.login(this.username, this.password).subscribe(
+      (response) => {
+        console.log('Login successful', response);
+        // Store JWT token (e.g., in localStorage)
+        localStorage.setItem('token', response.jwt);
+        // Redirect to protected route
+        this.router.navigate(['/products']);
+      },
+      (error) => {
+        console.error('Login error', error);
+        // Handle login error
+      }
+    );
   }
 }

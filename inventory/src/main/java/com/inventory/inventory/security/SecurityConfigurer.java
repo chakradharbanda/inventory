@@ -46,8 +46,8 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
             .authorizeRequests()
                 .antMatchers("/api/auth/**").permitAll()  // Allow public access to authentication endpoints
-                .antMatchers("/api/products/**").permitAll()  // Require authentication for product endpoints
-                .antMatchers("/api/test/**").permitAll()  // Allow public access to test endpoint
+                .antMatchers("/api/products/**").authenticated()  // Require authentication for product endpoints
+                .antMatchers("/api/test/**").authenticated()  // Allow public access to test endpoint
                 .anyRequest().authenticated()  // Require authentication for all other requests
             .and()
             .sessionManagement()

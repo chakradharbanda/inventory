@@ -12,22 +12,22 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  login(credentials: any): Observable<boolean> {
-    return this.http.post<{ token: string }>(`${this.baseUrl}/login`, credentials)
-      .pipe(
-        map(response => {
-          localStorage.setItem('access_token', response.token);
-          return true;
-        })
-      );
+  // Register method
+  register(username: string, password: string): Observable<any> {
+    return this.http.post(`${this.baseUrl}/register`, { username, password });
+  }
+
+  // Login method
+  login(username: string, password: string): Observable<any> {
+    return this.http.post(`${this.baseUrl}/login`, { username, password });
   }
 
   logout() {
-    localStorage.removeItem('access_token');
+    localStorage.removeItem('token');
     this.router.navigate(['login']);
   }
 
   public get loggedIn(): boolean {
-    return localStorage.getItem('access_token') !== null;
+    return localStorage.getItem('token') !== null;
   }
 }
