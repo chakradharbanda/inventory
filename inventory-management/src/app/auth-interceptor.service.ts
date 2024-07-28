@@ -13,6 +13,18 @@ export class AuthInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
+    const excludedUrls = [
+      '/api/auth/register', // Registration endpoint
+      '/api/auth/login', // Login endpoint
+    ];
+
+    // Check if the request URL matches any of the excluded URLs
+    const isExcluded = excludedUrls.some((url) => req.url.includes(url));
+
+    if (isExcluded) {
+      // If the URL is excluded, proceed without adding the Authorization header
+      return next.handle(req);
+    }
     const token = localStorage.getItem('token');
     if (token) {
       const cloned = req.clone({

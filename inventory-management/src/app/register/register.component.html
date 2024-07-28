@@ -1,0 +1,90 @@
+<!-- <div class="register-container">
+    <h2>Register</h2>
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" [(ngModel)]="registerData.username" name="username" required>
+      </div>
+  
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" [(ngModel)]="registerData.email" name="email" required>
+      </div>
+  
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" [(ngModel)]="registerData.password" name="password" required>
+      </div>
+  
+      <button type="submit" pButton pRipple label="Register"></button>
+    </form>
+  </div> -->
+
+<div class="flex justify-content-center align-items-center h-screen">
+  <div class="surface-card p-4 shadow-2 border-round w-full lg:w-6">
+    <div class="text-center mb-5">
+      <img
+        src="/assets/images/hyper.png"
+        alt="Image"
+        height="50"
+        class="mb-3"
+      />
+      <div class="text-900 text-3xl font-medium mb-3">Register</div>
+    </div>
+    <div>
+      <form (ngSubmit)="onSubmit()" class="flex flex-column gap-2">
+        <label for="email1" class="block text-900 font-medium mb-2">User</label>
+        <input
+          type="text"
+          [(ngModel)]="registerData.username"
+          name="username"
+          class="form-control"
+          pInputText
+          class="w-full mb-3"
+          required
+        />
+
+        <label for="password1" class="block text-900 font-medium mb-2"
+          >Password</label
+        >
+        <input
+          type="password"
+          [(ngModel)]="registerData.password"
+          name="password"
+          class="form-control"
+          pInputText
+          class="w-full mb-3"
+          required
+        />
+
+        <div class="flex flex-column gap-2">
+          <label for="password2" class="block text-900 font-medium mb-2"
+            >Confirm Password</label
+          >
+          <input
+            type="password"
+            [(ngModel)]="confirmPassword"
+            name="password"
+            class="form-control"
+            pInputText
+            class="w-full mb-3"
+            required
+          />
+
+          @if(passwordMismatch) {
+          <small>Passwords do not match.</small>
+          }
+        </div>
+
+        <button
+          pButton
+          pRipple
+          type="submit"
+          label="Register"
+          icon="pi pi-user"
+          class="w-full"
+        ></button>
+      </form>
+    </div>
+  </div>
+</div>
