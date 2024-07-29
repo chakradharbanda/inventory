@@ -1,0 +1,47 @@
+<div class="page-container">
+    <div class="page-header">
+      <h1>Dashboard</h1>
+      <p>Overview of your system's key metrics and recent activities.</p>
+    </div>
+  
+    <div class="dashboard-cards">
+      <p-card title="Total Sales" [style]="{'width':'200px'}">
+        <h3>{{ totalSales }}</h3>
+        <p>Total revenue generated</p>
+      </p-card>
+  
+      <p-card title="Products in Stock" [style]="{'width':'200px'}">
+        <h3>{{ productsInStock }}</h3>
+        <p>Total number of products in stock</p>
+      </p-card>
+  
+      <p-card title="New Orders" [style]="{'width':'200px'}">
+        <h3>{{ newOrders }}</h3>
+        <p>Number of new orders</p>
+      </p-card>
+  
+      <p-card title="Pending Requests" [style]="{'width':'200px'}">
+        <h3>{{ pendingRequests }}</h3>
+        <p>Number of pending customer requests</p>
+      </p-card>
+    </div>
+  
+    <div class="charts-container">
+      <p-card title="Sales Over Time">
+        <p-chart type="line" [data]="salesData"></p-chart>
+      </p-card>
+  
+      <p-card title="Stock Levels by Category">
+        <p-chart type="bar" [data]="stockLevelsData"></p-chart>
+      </p-card>
+    </div>
+  
+    <div class="recent-activity">
+      <p-card title="Recent Activity">
+        <ul>
+          <li *ngFor="let activity of recentActivities">{{ activity }}</li>
+        </ul>
+      </p-card>
+    </div>
+  </div>
+  

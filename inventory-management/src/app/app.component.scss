@@ -1,0 +1,55 @@
+/* Overall navbar styling */
+:host ::ng-deep .p-menubar {
+    background-color: #e1e1e6;
+    border: none;
+    color: white;
+  }
+  
+  :host ::ng-deep .p-menubar .p-menuitem-link {
+    color: white;
+  }
+  
+  :host ::ng-deep .p-menubar .p-menuitem-link:hover {
+    color: #ffde59;
+  }
+  
+  :host ::ng-deep .p-menubar .p-menubar-start .logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+  }
+  
+  /* Search bar styling */
+  :host ::ng-deep .p-menubar .p-menubar-end .search-bar {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 4px;
+    padding: 0.25rem 0.5rem;
+  }
+  
+  :host ::ng-deep .p-menubar .p-menubar-end .search-bar .p-inputtext {
+    border: none;
+    outline: none;
+    padding: 0.25rem;
+  }
+  
+  :host ::ng-deep .p-menubar .p-menubar-end .search-bar .p-inputtext::placeholder {
+    color: #999;
+  }
+  
+  :host ::ng-deep .p-menubar .p-menubar-end .p-button-text {
+    color: white;
+  }
+  
+  :host ::ng-deep .p-menubar .p-menubar-end .p-button-rounded {
+    background-color: transparent;
+    border: none;
+    color: white;
+  }
+
+  .layout {
+    height: 100vh;
+  }
+  
