@@ -8,19 +8,21 @@
       <ng-template pTemplate="header">
         <tr>
           <th pSortableColumn="name">Product Name <p-sortIcon field="name"></p-sortIcon></th>
+          <th pSortableColumn="description">Description <p-sortIcon field="description"></p-sortIcon></th>
           <th pSortableColumn="category">Category <p-sortIcon field="category"></p-sortIcon></th>
           <th pSortableColumn="price">Price <p-sortIcon field="price"></p-sortIcon></th>
-          <th pSortableColumn="stock">Stock <p-sortIcon field="stock"></p-sortIcon></th>
+          <th pSortableColumn="quantity">Stock <p-sortIcon field="quantity"></p-sortIcon></th>
           <th>Actions</th>
         </tr>
       </ng-template>
 
       <ng-template pTemplate="body" let-product>
         <tr>
-          <td>{{ product.name }}</td>
+          <td>{{ product.name }}</td>          
+          <td>{{ product.description }}</td>
           <td>{{ product.category }}</td>
           <td>{{ product.price | currency }}</td>
-          <td>{{ product.stock }}</td>
+          <td>{{ product.quantity }}</td>
           <td>
             <button pButton icon="pi pi-pencil" (click)="editProduct(product)" class="p-button-rounded p-button-info"></button>
             <button pButton icon="pi pi-trash" (click)="deleteProduct(product)" class="p-button-rounded p-button-danger"></button>

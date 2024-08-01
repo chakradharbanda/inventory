@@ -32,34 +32,22 @@ import { CardModule } from 'primeng/card';
     InputGroupModule,
     StyleClassModule,
     HttpClientModule,
-    CardModule
+    CardModule,
   ],
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss'],
 })
 export class ProductListComponent implements OnInit {
-  // products: Product[] = [];
-
-  // constructor(private inventoryService: InventoryService) {}
-
-  // ngOnInit(): void {
-  //   this.inventoryService.getProducts().subscribe((products) => {
-  //     this.products = products;
-  //   });
-  // }
-
   products: any[] = [];
   sortField: string = 'name';
   sortOrder: number = 1;
 
-  ngOnInit() {
-    // Sample data
-    this.products = [
-      { name: 'Product 1', category: 'Category 1', price: 29.99, stock: 100 },
-      { name: 'Product 2', category: 'Category 2', price: 19.99, stock: 50 },
-      { name: 'Product 3', category: 'Category 1', price: 39.99, stock: 20 },
-      // Add more products as needed
-    ];
+  constructor(private inventoryService: InventoryService) {}
+
+  ngOnInit(): void {
+    this.inventoryService.getProducts().subscribe((products) => {
+      this.products = products;
+    });
   }
 
   onSort(event: any) {
@@ -75,6 +63,6 @@ export class ProductListComponent implements OnInit {
   deleteProduct(product: any) {
     // Logic for deleting a product
     console.log('Delete product', product);
-    this.products = this.products.filter(p => p !== product);
+    this.products = this.products.filter((p) => p !== product);
   }
 }

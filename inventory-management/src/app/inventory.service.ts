@@ -43,6 +43,14 @@ export class InventoryService {
       .pipe(catchError(this.handleError<Product>(`getProduct id=${id}`)));
   }
 
+  /** POST: add a new product to the server */
+  addProduct(product: Product): Observable<Product> {
+    return this.http.post<Product>(this.productsUrl, product, this.httpOptions)
+      .pipe(
+        catchError(this.handleError<Product>('addProduct'))
+      );
+  }
+  
   /** PUT: update the product on the server */
   updateProduct(product: Product): Observable<any> {
     return this.http
