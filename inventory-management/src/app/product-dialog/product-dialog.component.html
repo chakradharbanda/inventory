@@ -1,0 +1,35 @@
+<!-- product-dialog.component.html -->
+<p-dialog header="Edit Product" [(visible)]="display" [modal]="true" [closable]="false">
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="name">Product Name</label>
+          <input pInputText id="name" formControlName="name" required />
+        </div>
+  
+        <div class="form-group">
+          <label for="description">Description</label>
+          <input pInputText id="description" formControlName="description" required />
+        </div>
+      
+        <!-- <div class="form-group">
+          <label for="category">Category</label>
+          <p-dropdown id="category" [options]="categories" formControlName="category" optionLabel="name" placeholder="Select a Category" required></p-dropdown>
+        </div> -->
+      
+        <div class="form-group">
+          <label for="price">Price</label>
+          <p-inputNumber id="price" formControlName="price" [min]="0" [max]="10000" required></p-inputNumber>
+        </div>
+      
+        <div class="form-group">
+          <label for="quantity">Stock</label>
+          <p-inputNumber id="quantity" formControlName="quantity" [min]="0" [max]="10000" required></p-inputNumber>
+        </div>
+      
+        <div class="form-group">
+          <button pButton type="submit" label="Add Product" icon="pi pi-check" class="p-button-success"></button>
+          <button pButton type="button" (click)="onCancel()" label="Cancel" icon="pi pi-times" class="p-button-secondary"></button>
+        </div>
+      </form>
+  </p-dialog>
+  

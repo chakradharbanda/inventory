@@ -1,0 +1,24 @@
+/* Form styling */
+form {
+    display: grid;
+    gap: 1rem;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-group label {
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+  }
+  
+  .form-group p-inputText, .form-group p-dropdown, .form-group p-inputNumber {
+    width: 100%;
+  }
+  
+  button {
+    margin-right: 0.5rem;
+  }
+  

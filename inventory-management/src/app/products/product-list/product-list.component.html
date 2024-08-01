@@ -3,7 +3,6 @@
     <h1>Product List</h1>
     <p>Manage and view your inventory here.</p>
   </div>
-
     <p-table [value]="products" [paginator]="true" [rows]="10" [responsive]="true" [sortField]="sortField" [sortOrder]="sortOrder" (onSort)="onSort($event)">
       <ng-template pTemplate="header">
         <tr>
@@ -30,4 +29,7 @@
         </tr>
       </ng-template>
     </p-table>
+    <!-- <app-product-dialog [display]="displayDialog" [product]="selectedProduct"></app-product-dialog> -->
+
+    <app-product-dialog [display]="displayDialog" [product]="selectedProduct" (onClose)="onDialogClose($event)"></app-product-dialog>
 </div>
