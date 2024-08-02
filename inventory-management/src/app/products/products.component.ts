@@ -55,6 +55,7 @@ export class ProductsComponent implements OnInit {
     this.productForm = this.fb.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
+      category: [''],
       price: [
         0,
         [Validators.required, Validators.min(0), Validators.max(10000)],
@@ -63,6 +64,13 @@ export class ProductsComponent implements OnInit {
         0,
         [Validators.required, Validators.min(0), Validators.max(10000)],
       ],
+    });
+    this.getCategories();
+  }
+
+  getCategories(): void {
+    this.inventoryService.getCategories().subscribe((categories) => {
+      this.categories = categories;
     });
   }
 

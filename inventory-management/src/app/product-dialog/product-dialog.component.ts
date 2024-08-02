@@ -15,8 +15,10 @@ import {
 } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
+import { DropdownModule } from 'primeng/dropdown';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { InputTextModule } from 'primeng/inputtext';
+import { InventoryService } from '../inventory.service';
 // import { Product } from './product.model';
 
 @Component({
@@ -28,6 +30,7 @@ import { InputTextModule } from 'primeng/inputtext';
     InputNumberModule,
     InputTextModule,
     ButtonModule,
+    DropdownModule,
   ],
   templateUrl: './product-dialog.component.html',
   styleUrl: './product-dialog.component.scss',
@@ -38,11 +41,16 @@ export class ProductDialogComponent implements OnInit, OnChanges {
   @Output() onClose: EventEmitter<any> = new EventEmitter();
 
   productForm!: FormGroup;
+  categories: any[] = [];
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private inventoryService: InventoryService
+  ) {}
 
   ngOnInit(): void {
     this.initForm();
+    this.getCategories();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -56,9 +64,15 @@ export class ProductDialogComponent implements OnInit, OnChanges {
       id: [''],
       name: ['', Validators.required],
       description: ['', Validators.required],
-      // category: ['', Validators.required],
+      category: [''],
       price: [0, [Validators.required, Validators.min(0)]],
       quantity: [0, [Validators.required, Validators.min(0)]],
+    });
+  }
+
+  getCategories(): void {
+    this.inventoryService.getCategories().subscribe((categories) => {
+      this.categories = categories;
     });
   }
 
