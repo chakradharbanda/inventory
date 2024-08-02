@@ -17,6 +17,7 @@ export interface Product {
 })
 export class InventoryService {
   private productsUrl = 'http://localhost:8080/api/products'; // URL to web api
+  private catergoriesUrl = 'http://localhost:8080/api/categories';
   token = localStorage.getItem('token');
 
   // Create the HttpHeaders object with the Authorization header
@@ -45,17 +46,42 @@ export class InventoryService {
 
   /** POST: add a new product to the server */
   addProduct(product: Product): Observable<Product> {
-    return this.http.post<Product>(this.productsUrl, product, this.httpOptions)
-      .pipe(
-        catchError(this.handleError<Product>('addProduct'))
-      );
+    return this.http
+      .post<Product>(this.productsUrl, product, this.httpOptions)
+      .pipe(catchError(this.handleError<Product>('addProduct')));
   }
-  
+
   /** PUT: update the product on the server */
   updateProduct(product: Product): Observable<any> {
     return this.http
-      .put(this.productsUrl, product, this.httpOptions)
+      .put(this.productsUrl + `/${product?.id}`, product, this.httpOptions)
       .pipe(catchError(this.handleError<any>('updateProduct')));
+  }
+
+  deleteProduct(id: number): Observable<any> {
+    return this.http
+      .delete(this.productsUrl + `/${id}`)
+      .pipe(catchError(this.handleError<any>('deleteProduct')));
+  }
+
+  getCategories(): Observable<any[]> {
+    return this.http
+      .get<any[]>(this.catergoriesUrl, this.httpOptions)
+      .pipe(catchError(this.handleError<Product[]>('getCategories', [])));
+  }
+
+  /** GET product by id. Will 404 if id not found */
+  getCategory(id: number): Observable<Product> {
+    const url = `${this.catergoriesUrl}/${id}`;
+    return this.http
+      .get<Product>(url)
+      .pipe(catchError(this.handleError<Product>(`getCategory id=${id}`)));
+  }
+
+  addCategory(category: any): Observable<any> {
+    return this.http
+      .post<any>(this.catergoriesUrl, category, this.httpOptions)
+      .pipe(catchError(this.handleError<Product>('addCategory')));
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

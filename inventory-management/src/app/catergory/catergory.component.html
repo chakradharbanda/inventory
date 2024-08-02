@@ -32,15 +32,15 @@
     </p-card>
   
     <p-dialog header="Add New Category" [(visible)]="showDialog" [modal]="true" [responsive]="true">
-      <form (ngSubmit)="onSubmit()" #categoryForm="ngForm">
+      <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label for="name">Category Name</label>
-          <p-inputText id="name" [(ngModel)]="newCategory.name" name="name" required></p-inputText>
+          <input pInputText id="name" formControlName="name" required />
         </div>
   
         <div class="form-group">
           <label for="description">Description</label>
-          <p-inputTextarea id="description" [(ngModel)]="newCategory.description" name="description" rows="3"></p-inputTextarea>
+          <textarea pInputTextarea id="description" formControlName="description" rows="3"></textarea>
         </div>
   
         <div class="form-group">

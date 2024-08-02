@@ -53,9 +53,10 @@ export class ProductDialogComponent implements OnInit, OnChanges {
 
   initForm(): void {
     this.productForm = this.fb.group({
+      id: [''],
       name: ['', Validators.required],
       description: ['', Validators.required],
-      category: ['', Validators.required],
+      // category: ['', Validators.required],
       price: [0, [Validators.required, Validators.min(0)]],
       quantity: [0, [Validators.required, Validators.min(0)]],
     });

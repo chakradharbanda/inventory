@@ -80,6 +80,10 @@ export class ProductListComponent implements OnInit {
         [Validators.required, Validators.min(0), Validators.max(10000)],
       ],
     });
+    this.loadProducts();
+  }
+
+  loadProducts(): void {
     this.inventoryService.getProducts().subscribe((products) => {
       this.products = products;
     });
@@ -101,22 +105,14 @@ export class ProductListComponent implements OnInit {
   deleteProduct(product: any) {
     // Logic for deleting a product
     console.log('Delete product', product);
-    this.products = this.products.filter((p) => p !== product);
-  }
-
-  onSubmit(): void {
-    if (this.productForm?.valid) {
-      console.log('Form Submitted', this.productForm.value);
-      this.inventoryService
-        .addProduct(this.productForm.value)
-        .subscribe((res) => {
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Success',
-            detail: 'Product edited successfully!',
-          });
-        });
-    }
+    this.inventoryService.deleteProduct(product?.id).subscribe((res) => {
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Success',
+        detail: 'Product deleted successfully!',
+      });
+      this.loadProducts();
+    });
   }
 
   onDialogClose(updatedProduct: Product) {
@@ -125,6 +121,14 @@ export class ProductListComponent implements OnInit {
     if (updatedProduct) {
       // Handle the updated product data, e.g., update the products list
       console.log('Updated Product:', updatedProduct);
+      this.inventoryService.updateProduct(updatedProduct).subscribe((res) => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: 'Product edited successfully!',
+        });
+        this.loadProducts();
+      });
     }
   }
 }
